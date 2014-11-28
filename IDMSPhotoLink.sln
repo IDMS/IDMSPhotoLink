@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDMSPhotoLink", "IDMSPhotoLink\IDMSPhotoLink.csproj", "{E2EC1AC5-86E5-40F2-8970-1D12661D4393}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{9E880904-AA22-4C4D-8BF1-8AE36FFA3B75}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{52D83CD8-BAEC-4245-AD70-9FE68F6DBEE8}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\IDMSDemoSite-WAWS-dev.json = PublishScripts\Configurations\IDMSDemoSite-WAWS-dev.json
+		PublishScripts\Configurations\IDMSPhotoLink-WAWS-dev.json = PublishScripts\Configurations\IDMSPhotoLink-WAWS-dev.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{058FE600-F190-4B65-9C53-E569519FB7CA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDMSPhotoLink.Tests", "IDMSPhotoLink.Tests\IDMSPhotoLink.Tests.csproj", "{6E5C54B7-BB2C-466E-93FA-82CC94B694C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDMSPhotoLink.SendTest", "IDMSPhotoLink.SendTest\IDMSPhotoLink.SendTest.csproj", "{CF579D09-B040-4728-9C5A-EC62F635A494}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2EC1AC5-86E5-40F2-8970-1D12661D4393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2EC1AC5-86E5-40F2-8970-1D12661D4393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2EC1AC5-86E5-40F2-8970-1D12661D4393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2EC1AC5-86E5-40F2-8970-1D12661D4393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E5C54B7-BB2C-466E-93FA-82CC94B694C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E5C54B7-BB2C-466E-93FA-82CC94B694C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E5C54B7-BB2C-466E-93FA-82CC94B694C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E5C54B7-BB2C-466E-93FA-82CC94B694C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF579D09-B040-4728-9C5A-EC62F635A494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF579D09-B040-4728-9C5A-EC62F635A494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF579D09-B040-4728-9C5A-EC62F635A494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF579D09-B040-4728-9C5A-EC62F635A494}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52D83CD8-BAEC-4245-AD70-9FE68F6DBEE8} = {9E880904-AA22-4C4D-8BF1-8AE36FFA3B75}
+	EndGlobalSection
+EndGlobal

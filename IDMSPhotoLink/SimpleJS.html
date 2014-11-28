@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <!--http://www.w3schools.com/jquery/demo_test.asp-->
+    <!--http://localhost:65095/api/EmployeePics?UserID=hebert&SubscriptionName=topic1&WaitMS=2000-->
+     <!--http://idmsphotolink.azurewebsites.net/api/EmployeePics?UserID=hebert&SubscriptionName=topic1&WaitMS=2000--> 
+
+    <script src="Scripts/jquery-1.10.2.js"></script>
+
+    <script lang="javascript">
+        var underway = 0;
+        function getPics() {
+            var myVar = setInterval(function () { getPic() }, 1000);
+
+        }
+        
+        function getPic() {
+            if (underway == 0) {
+                underway = 1;
+                //$.getJSON("http://localhost:65095/api/EmployeePics?UserID=hebert&SubscriptionName=topic1&WaitMS=10000", "",
+                //    function (data, status) { processResult(data, status); });
+                $.getJSON("http://idmsphotolink.azurewebsites.net/api/EmployeePics?UserID=hebert&SubscriptionName=topic1&WaitMS=10000", "",
+                    function (data, status) { processResult(data, status); });
+                }
+        }
+
+        function processResult(data, status) {
+
+            if (data.status == "TIMEOUT") {
+                underway = 0;
+                return;
+            }
+
+            if (data.status == "OK") {
+                document.getElementById("imgMain").src = data.PictureURL;
+                underway = 0;
+                return;
+            }
+
+            if (data.status == "ERROR") {
+                underway = 0;
+                document.getElementById("imgMain").src = data.PictureURL;
+                alert("ERROR Please call the help desk: " + data.message);
+                return;
+            }
+
+            document.getElementById("imgMain").src = data.PictureURL;
+            alert("Unknown response. Please call the help desk: " + data.message);
+            underway = 0;
+            return;
+
+        }
+
+
+    </script>
+
+    <title>ObjEx IDMSPhotoLink Demonstration</title>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100px;
+            height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div><img alt="" class="auto-style1" src="ObjEx_Logo-100x60.gif" /> </div>
+    <h1>IDMS PhotoLink</h1>
+    <h2>Start the test by clicking on the button below</h2>
+    <input id="Button6" type="button" value="TestJig" onclick="getPics();" />
+    <br /><br />
+    <img id="imgMain" src="Photos/no_image.jpg" />
+
+</body>
+</html>

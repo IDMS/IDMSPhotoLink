@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ObjEx Demonstration</title>
+    <style>
+        .TallRows {height:30px;}
+    </style>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script lang="javascript">
+        var underway = 0;
+
+        function getPics() {
+            // ensure that a UserID was supplied
+            if (document.getElementById("txtUserID").value.length < 1) {
+                alert("Please supply a UserID");
+                document.getElementById("txtUserID").focus();
+                return;
+            }
+            // ensure that a subscription name was supplied
+            if (document.getElementById("txtSubscription").value.length < 1) {
+                alert("Please supply a unque subscription name");
+                document.getElementById("txtSubscription").focus();
+                return;
+            }
+
+            // make sure the start button can't be pressed again
+            document.getElementById("btnStart").disabled = true;
+
+            // call the getPic() function on a regular interval
+            var myVar = setInterval(function () { getPic() }, 1000);
+        }
+
+        function getPic() {
+            if (underway == 0) {
+                underway = 1;
+
+                // build the URL from supplied values
+
+                //var url = "http://localhost:65095/api/EmployeePics?UserID=" +
+
+                var url = "http://idmsphotolink.azurewebsites.net/api/EmployeePics?UserID=" +
+                          document.getElementById("txtUserID").value +
+                          "&SubscriptionName=" +
+                          document.getElementById("txtSubscription").value +
+                          "&WaitMS=2000";
+                $.getJSON(url, "",
+                    function (data, status) { processResult(data, status); });
+            }
+        }
+
+        function processResult(data, status) {
+            underway = 0;
+
+            // set the image src based on the data received
+            if (data.status == "TIMEOUT") {
+                return;
+            }
+            if (data.status == "OK") {
+                document.getElementById("imgMain").src = data.PictureURL;
+                document.getElementById("lblEmpID").textContent = "EmpID: " + data.EmployeeID;
+                document.getElementById("lblName").textContent = data.firstName + " " + data.lastName;
+                return;
+            }
+            if (data.status == "ERROR") {
+                document.getElementById("imgMain").src = data.PictureURL;
+                document.getElementById("lblEmpID").textContent = "";
+                document.getElementById("lblName").textContent = "";
+                alert("ERROR Please call the help desk: " + data.message);
+                return;
+            }
+
+            // Handle an "unknown" response
+            document.getElementById("imgMain").src = data.PictureURL;
+            document.getElementById("lblEmpID").textContent = "";
+            document.getElementById("lblName").textContent = "";
+            alert("Unknown response. Please call the help desk: " + data.message);
+            return;
+        }
+    </script>
+</head>
+
+<body onload="document.getElementById('txtUserID').focus();">
+    <table>
+        <tr>
+            <td><img src="Photos/ObjEx_Logo-100x60.gif" /></td>
+            <td><h1>IDMS PhotoLink</h1></td>
+        </tr>
+    </table>
+    
+    <table class="TallRows">
+        <tr>
+            <td>1)</td>
+            <td>Enter your User ID: <input id="txtUserID" type="text" /></td>
+        </tr>
+        <tr>
+            <td>2)</td>
+            <td>Enter a unique subscription name: <input id="txtSubscription" type="text" /></td>
+        </tr>
+        <tr>
+            <td>3)</td>
+            <td>Click button to <input id="btnStart" type="button" value="Start Receiving" onclick="getPics();" /></td>
+        </tr>
+    </table>
+    <br />
+    
+    <table>
+        <tr>
+            <td style="text-align:center;">
+                <label style="font-weight:bold; font-size:xx-large" id="lblName"></label>
+                <br />
+                <img id="imgMain" src="Photos/no_image.jpg" />
+                <br />
+                <label id="lblEmpID"></label>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
